@@ -1,0 +1,27 @@
+{
+  "name": "npm-address-translator",
+  "version": "1.0.0",
+  "description": "A simple standalone library for address translation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JDonadio/npm-address-translator.git"
+  },
+  "keywords": [
+    "address",
+    "translator"
+  ],
+  "author": "JDonadio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JDonadio/npm-address-translator/issues"
+  },
+  "homepage": "https://github.com/JDonadio/npm-address-translator#readme",
+  "dependencies": {
+    "bitcore-lib": "^0.14.0",
+    "bitcore-lib-cash": "https://github.com/bitpay/bitcore-lib.git#cash"
+  }
+}
