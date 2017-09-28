@@ -1,6 +1,6 @@
 {
   "name": "npm-address-translator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple standalone library for address translation",
   "main": "index.js",
   "scripts": {

@@ -1,47 +1,47 @@
-exports.Translator = function() {
-  var bitcore = require('bitcore-lib');
-  var bitcoreCash = require('bitcore-lib-cash');
-  var Bitcore = {};
+var Translator = function() {};
 
-  Bitcore = {
-    'btc': {
-      lib: bitcore,
-      translateTo: 'bch'
-    },
-    'bch': {
-      lib: bitcoreCash,
-      translateTo: 'btc'
-    }
-  };
+var bitcore = require('bitcore-lib');
+var bitcoreCash = require('bitcore-lib-cash');
+var Bitcore = {
+  'btc': {
+    lib: bitcore,
+    translateTo: 'bch'
+  },
+  'bch': {
+    lib: bitcoreCash,
+    translateTo: 'btc'
+  }
+};
 
-  function getAddressCoin(address) {
+Translator.prototype.getAddressCoin = function(address) {
+  try {
+    new Bitcore['btc'].lib.Address(address);
+    return 'btc';
+  } catch (e) {
     try {
-      new Bitcore['btc'].lib.Address(address);
-      return 'btc';
+      new Bitcore['bch'].lib.Address(address);
+      return 'bch';
     } catch (e) {
-      try {
-        new Bitcore['bch'].lib.Address(address);
-        return 'bch';
-      } catch (e) {
-        return null;
-      }
+      return null;
     }
-  };
+  }
+};
 
-  function translateAddress(address) {
-    var origCoin = getAddressCoin(address);
-    if (!origCoin) return;
+Translator.prototype.translateAddress = function(address) {
+  var origCoin = getAddressCoin(address);
+  if (!origCoin) return;
 
-    var origAddress = new Bitcore[origCoin].lib.Address(address);
-    var origObj = origAddress.toObject();
+  var origAddress = new Bitcore[origCoin].lib.Address(address);
+  var origObj = origAddress.toObject();
 
-    var resultCoin = Bitcore[origCoin].translateTo;
-    var resultAddress = Bitcore[resultCoin].lib.Address.fromObject(origObj);
-    return {
-      origCoin: origCoin.toUpperCase(),
-      origAddress: address,
-      resultCoin: resultCoin.toUpperCase(),
-      resultAddress: resultAddress.toString()
-    };
+  var resultCoin = Bitcore[origCoin].translateTo;
+  var resultAddress = Bitcore[resultCoin].lib.Address.fromObject(origObj);
+  return {
+    origCoin: origCoin.toUpperCase(),
+    origAddress: address,
+    resultCoin: resultCoin.toUpperCase(),
+    resultAddress: resultAddress.toString()
   };
 };
+
+module.exports = Translator;
