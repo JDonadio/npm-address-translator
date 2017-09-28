@@ -30,7 +30,7 @@ Translator.getAddressCoin = function(address) {
 };
 
 Translator.translateAddress = function(address) {
-  var origCoin = getAddressCoin(address);
+  var origCoin = Translator.getAddressCoin(address);
   if (!origCoin) return;
 
   var origAddress = new Bitcore[origCoin].lib.Address(address);
