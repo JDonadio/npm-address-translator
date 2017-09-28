@@ -1,4 +1,6 @@
-var Translator = function() {};
+'use strict';
+
+var Translator = module.exports;
 
 var bitcore = require('bitcore-lib');
 var bitcoreCash = require('bitcore-lib-cash');
@@ -13,7 +15,7 @@ var Bitcore = {
   }
 };
 
-Translator.prototype.getAddressCoin = function(address) {
+Translator.getAddressCoin = function(address) {
   try {
     new Bitcore['btc'].lib.Address(address);
     return 'btc';
@@ -27,7 +29,7 @@ Translator.prototype.getAddressCoin = function(address) {
   }
 };
 
-Translator.prototype.translateAddress = function(address) {
+Translator.translateAddress = function(address) {
   var origCoin = getAddressCoin(address);
   if (!origCoin) return;
 
@@ -43,5 +45,3 @@ Translator.prototype.translateAddress = function(address) {
     resultAddress: resultAddress.toString()
   };
 };
-
-module.exports = Translator;
