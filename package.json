@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/JDonadio/npm-address-translator#readme",
   "dependencies": {
-    "bitcore-lib": "^0.14.0",
+    "bitcore-lib": "^0.15.0",
     "bitcore-lib-cash": "https://github.com/bitpay/bitcore-lib.git#cash"
   }
 }
